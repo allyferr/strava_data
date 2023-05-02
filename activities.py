@@ -14,12 +14,13 @@ def limited_activities(amt_activities, header):
 
 
 # When user wants All activities
-def all_activities(header):
+def all_activities(amt_activities, header):
+    per_page = 200
     request_page_num = 1
     my_activities = []
     print('Fetching activities...')
     while True:
-        param = {'per_page': 200, 'page': request_page_num}
+        param = {'per_page': per_page, 'page': request_page_num}
         # initial request, where we request the first page of activities
         my_dataset = requests.get(activities_url, headers=header, params=param).json()
 
@@ -35,7 +36,21 @@ def all_activities(header):
         else:
             my_activities = my_dataset
 
-        request_page_num += 1
+        # If we don't want all activities, we need to reduce the per_page
+        if amt_activities.upper() != 'ALL':
+            activities_remaining = int(amt_activities) - 200 * request_page_num
+            if 0 < activities_remaining <= 200:
+                per_page = activities_remaining
+            elif activities_remaining <= 0:
+                per_page = 0
+            elif activities_remaining > 200:
+                per_page = 200
+
+            # print(f'per_page: {per_page}\n')
+            # print(f'activities_remaining {activities_remaining}\n')
+            # print(f'loop {request_page_num}')
+
+            request_page_num += 1
 
     print(f'{len(my_activities)} have been fetched.')
     return my_activities
