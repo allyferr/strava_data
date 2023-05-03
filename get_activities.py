@@ -2,7 +2,6 @@ import auth
 import activities
 
 header = auth.get_new_token()
-print(header)
 amt_activities = input('How many activities would you like to fetch?\nType the amount or "All": ')
 
 if amt_activities.upper() == 'ALL':

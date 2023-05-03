@@ -45,12 +45,14 @@ def all_activities(amt_activities, header):
                 per_page = 0
             elif activities_remaining > 200:
                 per_page = 200
-
+            request_page_num += 1
+        else:
+            request_page_num += 1
             # print(f'per_page: {per_page}\n')
             # print(f'activities_remaining {activities_remaining}\n')
             # print(f'loop {request_page_num}')
 
-            request_page_num += 1
+
 
     print(f'{len(my_activities)} have been fetched.')
     return my_activities
