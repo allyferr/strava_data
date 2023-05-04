@@ -1,4 +1,4 @@
-<h1>Strava Data</h1>
+<h1>Strava Data Exporter</h1>
 <p>This repository contains code that interacts with the Strava API to retrieve and export activities, laps and decoded polyline data.</p>
 
 <p><h2>Getting Started</h2></p>
